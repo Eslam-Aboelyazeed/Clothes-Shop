@@ -1,0 +1,29 @@
+@if (flag == "Loading...") {
+    <div class="container text-center my-5">
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
+                <img src="assets/Images/loading.png" style="height: 400px;"/>
+                <h3>{{flag}}</h3>
+            </div>
+        </div>
+    </div>
+}@else if(flag == "Successfully Confirmed Email") {
+    <div class="container text-center my-5">
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
+                <img src="assets/Images/checked.png" style="height: 400px;"/>
+                <h3>{{flag}}</h3>
+                <button [routerLink]="'/'" class="btn btn-secondary text-light">Back To Home</button>
+            </div>
+        </div>
+    </div>
+}@else {
+    <div class="container text-center my-5">
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
+                <img src="assets/Images/cancel.png" style="height: 400px;"/>
+                <h3>Try again later!</h3>
+             </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,63 @@
+<nav class="navbar bg-dark sticky-top navbar-expand-lg" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Clothes Shop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ps-0 ms-0 ps-lg-5 ms-lg-5" id="navbarNav">
+            <ul class="navbar-nav mt-3 fs-6">
+                <li class="nav-item">
+                    @if (ActiveLink.includes("home") || ActiveLink == "/") {
+                        <a class="nav-link active" (click)="changeActiveLink('home')" aria-current="page">Home</a>
+                    }@else {
+                        <a class="nav-link" (click)="changeActiveLink('home')" [routerLink]="'/'">Home</a>
+                    }
+                </li>
+                <li class="nav-item">
+                    @if (ActiveLink.includes("products")) {
+                        <a class="nav-link active" aria-current="page" (click)="changeActiveLink('products')">Products</a>
+                    }@else {
+                        <a class="nav-link" (click)="changeActiveLink('products')" [routerLink]="'/products'">Products</a>
+                    }
+                </li>
+                <li class="nav-item">
+                    @if (ActiveLink.includes("contact")) {
+                        <a class="nav-link active" aria-current="page" (click)="changeActiveLink('contactUs')">Contact Us</a>
+                    }@else {
+                        <a class="nav-link" (click)="changeActiveLink('contactUs')" [routerLink]="'/contactus'">Contact Us</a>
+                    }
+                </li>
+                <li class="nav-item mt-2 mt-lg-0" style="bottom: 8px; position: relative;">
+                    @if (ActiveLink.includes("cart")) {
+                        <a class="nav-link active" aria-current="page" (click)="changeActiveLink('cart')"><mat-icon aria-hidden="false" matBadge="{{cartCount}}" matBadgeColor="warn"><i class="bi bi-cart fs-5"></i></mat-icon></a>
+                    }@else {
+                        <a class="nav-link" (click)="changeActiveLink('cart')" [routerLink]="'cart'"><mat-icon aria-hidden="false" matBadge="{{cartCount}}" matBadgeColor="warn"><i class="bi bi-cart fs-5"></i></mat-icon></a>
+                    }
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav mt-2 fs-6">
+                @if (UserName == "") {
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="'login'">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="'register'">Register</a>
+                    </li>
+                }@else {
+                    <li class="nav-item">
+                        @if (ActiveLink == "userProfile") {
+                            <a class="nav-link active" aria-current="page" (click)="changeActiveLink('userProfile')">Welcome, {{UserName}}</a>
+                        }@else {
+                            <a class="nav-link" (click)="changeActiveLink('userProfile')" [routerLink]="'/userdetails'">Welcome, {{UserName}}</a>
+                        }
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="cursor: pointer;" (click)="Logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>

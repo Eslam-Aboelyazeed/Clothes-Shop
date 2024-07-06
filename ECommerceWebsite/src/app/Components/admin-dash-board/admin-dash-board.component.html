@@ -1,0 +1,161 @@
+<div class="container-fluid">
+    <div class="navigation {{toggleLink?'active':''}}">
+        <ul>
+            <li (click)="HomeLinkHovered()" class="{{homeHoverLink?'active':''}}">
+                <a href="#">
+                    <span class="icon">
+                        <i class="bi bi-shop"></i>
+                    </span>
+                    <span class="title">Clothes Shop</span>
+                </a>
+            </li>
+
+            <li (mouseover)="linkHovered()" class="{{activeLink=='home'?'activ':''}}" (click)="changeActive('home')">
+                <a style="cursor: pointer;">
+                    <span class="icon">
+                        <i class="bi bi-house"></i>
+                    </span>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+
+            <li (mouseover)="linkHovered()" class="{{activeLink=='add'?'activ':''}} mt-4" (click)="changeActive('add')">
+                <a style="cursor: pointer;">
+                    <span class="icon">
+                        <i class="bi bi-plus"></i>
+                    </span>
+                    <span class="title">Add Product</span>
+                </a>
+            </li>
+
+            <li (mouseover)="linkHovered()" class="mt-4">
+                <a style="cursor: pointer;" (click)="Logout()">
+                    <span class="icon">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </span>
+                    <span class="title">Sign Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    
+    <!-- ========================= Main ==================== -->
+    <div class="main {{toggleLink?'active':''}}">
+        <div class="topbar">
+            <div class="toggle" (click)="toggle()">
+                <i class="bi bi-list"></i>
+            </div>
+
+             @if (activeLink == "home") {
+                <div class="search">
+                    <label>
+                        <input type="text" (input)="searchByName()" [(ngModel)]="productName" placeholder="Search here" class="form-control">
+                        <i class="bi bi-search pt-1"></i>
+                    </label>
+                </div>
+            }
+        </div>
+        
+        @if(activeLink == "home"){
+        <!-- ================ Order Details List ================= -->
+        <div class="details">
+            <div class="recentOrders">
+                <div class="container my-4 text-center">
+                    <div class="row justify-content-center align-items-center my-3">
+                        <div class="col-10">
+                            <mat-chip-set class="d-grid"> 
+                                <div class="ps-5" style="width: 100%;">
+                                    <mat-chip class="example-box"(click)="filter('All')">All</mat-chip>
+                                    @for (category of categories; track category) {
+                                      <mat-chip class="example-box"(click)="filter(category)">{{category}}</mat-chip>
+                                    }
+                                </div>
+                            </mat-chip-set>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardHeader">
+                    <h2>{{filterText}}</h2>
+                </div>
+
+                <table class="text-center">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col style="width: 25%;">
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                        <col style="width: 9%;">
+                    </colgroup>
+
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Rating</th>
+                            <th>ImageUrl</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="text-center">
+                        @if (productList.length == 0) {
+                            <tr>
+                                <td colspan="8" class="text-center">No products are added yet!</td>
+                            </tr>
+                        }@else {
+                            @for (product of productList; track product.id) {
+                                <tr>
+                                    <td>{{product.id}}</td>
+                                    <td>{{product.name}}</td>
+                                    <td>{{getKeyByValue(product.type)}}</td>
+                                    <td>{{product.description}}</td>
+                                    <td>{{product.price | currency}}</td>
+                                    <td>{{product.quantity}}</td>
+                                    <td>{{product.rating}}</td>
+                                    <td><img src="{{product.imageUrl}}" alt="{{product.name}}" style="width: 75px;"></td>
+                                    <td><a class="btn btn-warning px-4 py-1 mx-2 rounded-5 mt-2" (click)="editProduct(product.id)">Edit</a><a class="btn btn-danger px-4 py-1 mx-2 rounded-5 mt-2" (click)="deleteProduct(product.id)">Delete</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+              <ul class="pagination">
+                <li class="page-item {{(currentPage == 1)?'disabled':''}}">
+                  <a class="page-link py-1 px-2" (click)="switchPages(-1)" style="cursor: pointer;" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                @for (i of pagesList; track $index) {
+                  <li class="page-item {{(currentPage == i)?'active':''}}"><a class="page-link py-1 px-2" (click)="switchPages(i)" style="cursor: pointer;">{{i}}</a></li>
+                }
+  
+                <li class="page-item {{(currentPage == products?.totalPages)?'disabled':''}}">
+                  <a class="page-link py-1 px-2" (click)="switchPages(0)" style="cursor: pointer;" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+        </div>
+        
+        }@else if (activeLink == "add") 
+        {
+            <app-add-product (addingProductEvent)="addProduct($event)"></app-add-product>
+        }@else if (activeLink == "update" && proId != 0) 
+        {
+            <app-update-product (updatingProductEvent)="updateProduct($event)" [productId]="proId"></app-update-product>
+        }
+    </div>
+</div>

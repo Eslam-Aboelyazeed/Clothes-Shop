@@ -1,0 +1,21 @@
+<!-- <app-nav-bar (ActiveLinkChanged)="ChangeActivePage($event)"></app-nav-bar> -->
+<!-- <app-not-found></app-not-found> -->
+<!-- <app-slider></app-slider> -->
+<!-- <app-home></app-home> -->
+<!-- <app-product-details></app-product-details> -->
+<!-- <app-admin-dash-board></app-admin-dash-board> -->
+<!-- <app-contact-us></app-contact-us> -->
+<!-- <app-footer></app-footer> -->
+<!-- <app-add-product></app-add-product> -->
+<!-- <app-product-list></app-product-list> -->
+
+<!-- <app-register></app-register> -->
+<!-- <app-login></app-login> -->
+<!-- <app-cart></app-cart> -->
+@if (ActivePage == '/' || ActivePage.includes('/products') || ActivePage == '/cart' || ActivePage == '/contactus') {
+    <app-nav-bar></app-nav-bar>
+}
+<router-outlet></router-outlet>
+@if (ActivePage == '/' || ActivePage.includes('/products') || ActivePage == '/cart' || ActivePage == '/contactus') {
+    <app-footer></app-footer>
+}

@@ -1,0 +1,54 @@
+<div class="container my-3 text-center">
+    <div class="row justify-content-center">
+        <div class="col-sm-10">
+            <form class="form" [formGroup]="form" (submit)="AddProduct(fileinput)">
+                <div class="mb-3">
+                    <label for="pname" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Please enter product name" id="pname" name="pname">
+                    @if (form.controls['name'].touched && getName.errors) {
+                        <div id="pname-validation" class="form-text text-danger">Product Name is Required and must have 3 or more characters</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="ptype" class="form-label">Product Type</label>
+                    <select class="form-select text-center" id="ptype" formControlName="type">
+                        <option selected disabled value="">--Select the product type--</option>
+                        @for (option of options; track $index) {
+                            <option value="{{$index}}">{{ option }}</option>
+                        }
+                    </select>                      
+                    @if (form.controls['type'].touched && getType.errors) {
+                        <div id="ptype-validation" class="form-text text-danger">Product Type is Required</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="pdes" class="form-label">Product Description</label>
+                    <input type="text" class="form-control" formControlName="description" placeholder="Please enter product description" id="pdes" name="pdes">
+                </div>
+                <div class="mb-3">
+                    <label for="pprice" class="form-label">Product Price</label>
+                    <input type="number" class="form-control" formControlName="price" placeholder="Please enter product price" id="pprice" name="pprice">
+                    @if (form.controls['price'].touched && getPrice.errors) {
+                        <div id="pprice-validation" class="form-text text-danger">Product Price is Required and must be higher than 0</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="pquantity" class="form-label">Product Quantity</label>
+                    <input type="number" class="form-control" formControlName="quantity" placeholder="Please enter product Quantity" id="pquantity" name="pquantity">
+                    @if (form.controls['quantity'].touched && getQuantity.errors) {
+                        <div id="pquantity-validation" class="form-text text-danger">product Quantity is Required and must be higher than -1</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="prating" class="form-label">Product Rating</label>
+                    <input type="number" class="form-control" formControlName="rating" placeholder="Please enter product Rating" id="prating" name="prating">
+                </div>
+                <div class="mb-3">
+                    <label for="pimg" class="form-label">Product Image</label>
+                    <input type="file" class="form-control" (change)="onFileSelected($event)" #fileinput placeholder="Please enter product Image Url" id="pimg" name="pimg">
+                </div>
+                    <input class="btn btn-success rounded" value="Add Product" type="submit" />
+            </form>
+        </div>
+    </div>
+</div>

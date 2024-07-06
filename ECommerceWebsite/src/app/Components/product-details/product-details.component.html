@@ -1,0 +1,129 @@
+<a style="cursor: pointer;" class="ms-5 mt-5" routerLink="/products"><i class="fa-solid fa-arrow-left" style="height: 2em; padding-top: 15px;"></i></a>
+@if (product) {
+  <section class="py-5">
+      <div class="container">
+        <div class="row gx-5">
+          <aside class="col-lg-6">
+            <div class="border rounded-4 mb-3 d-flex justify-content-center">
+              <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="{{product.imageUrl}}">
+                <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{product.imageUrl}}" />
+              </a>
+            </div>
+          </aside>
+          <main class="col-lg-6">
+            <div class="ps-lg-3">
+              <h4 class="title text-dark">
+                {{product.name}}
+              </h4>
+              <div class="d-flex flex-row my-3">
+                <div class="text-warning mb-1 me-2" *ngIf="key">
+                  @for (i of array; track $index) {
+                    @if (i <= rating) {
+                      <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    }@else if ((i - 1) < rating && rating < i) {
+                      <i class="fa-solid fa-star-half-stroke" style="color: #FFD43B;"></i>
+                    }@else {
+                      <i class="fa-regular fa-star"></i>
+                    }
+                  }
+                </div>
+              </div>
+    
+              <div class="mb-3">
+                <span class="h5">{{product.price | currency}}</span>
+                <span class="text-muted">/per Item</span>
+              </div>
+              <div class="row">
+                <dt class="col-3">Type:</dt>
+                <dd class="col-9">{{getType(product.type)}}</dd>
+              </div>
+    
+              <hr />
+    
+              <div class="row mb-4">
+                <div class="col-md-4 col-6 mb-3">
+                  <label class="mb-2 d-block">Quantity</label>
+                  <div class="input-group mb-3" style="width: 170px;">
+                    <button class="btn btn-white border border-secondary px-3" type="button" (click)="reduce()" id="button-addon1" data-mdb-ripple-color="dark">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <input type="text" class="form-control text-center border border-secondary" [(ngModel)]="q" placeholder="1" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                    <button class="btn btn-white border border-secondary px-3" type="button" (click)="increase()" id="button-addon2" data-mdb-ripple-color="dark">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <a (click)="addToCart()" style="cursor: pointer;" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+            </div>
+          </main>
+        </div>
+      </div>
+  </section>
+}  
+<!-- content -->
+@if (product && products) {
+    <section class="bg-light border-top py-4">
+      <div class="container">
+        <div class="row gx-4">
+          <div class="col-lg-8 mb-4">
+            <div class="border rounded-2 px-3 py-2 bg-white">
+              <!-- Pills navs -->
+              <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item d-flex" role="presentation">
+                  <a class="nav-link d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1" data-mdb-toggle="pill" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Details</a>
+                </li>
+              </ul>
+              <!-- Pills navs -->
+    
+              <!-- Pills content -->
+              <div class="tab-content" id="ex1-content">
+                <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                  <p>
+                    {{product.description}}
+                  </p>
+                  <table class="table border mt-3 mb-2">
+                    <tr>
+                      <th class="py-2">Price:</th>
+                      <td class="py-2">{{product.price | currency}}</td>
+                    </tr>
+                    <tr>
+                      <th class="py-2">Quantity:</th>
+                      <td class="py-2">{{product.quantity}}</td>
+                    </tr>
+                    <tr>
+                      <th class="py-2">Type:</th>
+                      <td class="py-2">{{getType(product.type)}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <!-- Pills content -->
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="px-0 border rounded-2 shadow-0">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Similar items</h5>
+                  @for (p of products; track p.id) {
+                    <div class="d-flex mb-3">
+                      <a routerLink="/products/{{p.id}}" class="me-3">
+                        <img src="{{p.imageUrl}}" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                      </a>
+                      <div class="info">
+                        <a routerLink="/products/{{p.id}}" class="nav-link mb-1">
+                          {{p.name}}
+                        </a>
+                        <strong class="text-dark"> {{p.price | currency}}</strong>
+                      </div>
+                    </div>               
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+}

@@ -1,0 +1,74 @@
+<a style="cursor: pointer;" class="ms-5 mt-5" routerLink="/"><i class="fa-solid fa-arrow-left" style="height: 2em; padding-top: 15px;"></i></a>
+<section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-xl-3">
+          <nav class="nav flex-lg-column w-100 d-flex nav-pills mb-4">
+            <a class="nav-link my-1 mx-1 {{(active == 'AM')?'active':'bg-light'}}" (click)="changeActive('AM')"><p class="pb-0 mb-0" style="width: 130px">Account main</p></a>
+          </nav>
+        </div>
+        <main class="col-lg-9 col-xl-9">
+          <div class="card p-4 mb-0 shadow-0 border">
+            <div class="content-body">
+              <div class="d-flex align-items-center">
+                <div class="me-3">
+                  <img src="assets/Images/user.png" class="rounded-circle" style="height: 60px; width: 60px;" />
+                </div>
+                <div class="pt-2">
+                  <h4 class="pt-2">{{user?.userName}}</h4>
+                  <p>
+                    Email: {{user?.email}}, Phone: {{user?.phoneNumber}}
+                  </p>
+                </div>
+              </div>
+  
+              <hr />
+  
+              <div class="row g-2 mb-3">
+                <div class="col-md-6">
+                  <div class="border p-3 rounded-3 bg-light">
+                    <b class="mx-2 text-muted"><i class="fa fa-map-marker-alt"></i></b>
+                    {{user?.address}}
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4" />
+  
+              <h5 class="mb-3">Your orders</h5>
+              @for (order of userOrders; track $index) {
+                <div class="card border border-primary mb-4 shadow-0">
+                  <div class="card-body pb-0">
+                    <header class="d-lg-flex">
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Order ID: {{order.id}} <i class="dot"></i>  
+                          <span class="{{order.status == 'O'?'text-warning':'text-success'}}"> {{order.status == "O"?"In the cart":"Shipped"}}</span>
+                        </h6>
+                        <span class="text-muted">Date: {{order.orderDate}}</span>
+                      </div>
+                    </header>
+                    <hr />
+                    <ul class="row list-unstyled">
+                      @for (opro of order.orderProducts; track $index) {
+                        <li class="col-xl-4 col-lg-6">
+                          <div class="d-flex mb-3 mb-xl-0">
+                            <div class="me-3">
+                              <img width="72" height="72" src="{{opro.productImage}}" class="img-sm rounded border" />
+                            </div>
+                            <div class="">
+                              <p class="mb-0">{{opro.productName}}</p>
+                              <strong> {{opro.quantity}}x = {{opro.totalPrice | currency}} </strong>
+                            </div>
+                          </div>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </main>
+      </div>
+  
+    </div>
+</section>

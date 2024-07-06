@@ -1,0 +1,18 @@
+.icon-hover:hover {
+    border-color: #3b71ca !important;
+    background-color: white !important;
+}
+  
+.icon-hover:hover i {
+    color: #3b71ca !important;
+} 
+
+.applyPriceFilterBtn{
+    background-color: #3b71ca !important;
+    color: white;
+}
+
+.applyPriceFilterBtn:hover{
+    background-color: white !important;
+    color: black;
+}

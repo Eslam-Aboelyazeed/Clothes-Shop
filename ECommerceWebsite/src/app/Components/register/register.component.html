@@ -1,0 +1,69 @@
+<div class="container-fluid position-relative bg-white d-flex p-0" style="background-image: url(assets/Images/pexels-robin-381450-1020370.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <div class="container-fluid">
+        <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h3>Sign Up</h3>
+                    </div>
+                    <form [formGroup]="form" (submit)="register()">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" formControlName="firstName" id="floatingFname" placeholder="Ahmed">
+                            <label for="floatingFname">First Name</label>
+                            @if (form.controls['firstName'].touched && getFirstName.errors) {
+                                <div id="floatingFname-validation" class="form-text text-danger">First Name is Required and must be 3 characters or more</div>
+                            }
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" formControlName="lastName" id="floatingLname" placeholder="Mohamed">
+                            <label for="floatingLname">Last Name</label>
+                            @if (form.controls['lastName'].touched && getLastName.errors) {
+                                <div id="floatingLname-validation" class="form-text text-danger">Last Name is Required and must be 3 characters or more</div>
+                            }
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" formControlName="phoneNumber" id="floatingPhoneNumber" placeholder="+201032049712">
+                            <label for="floatingPhoneNumber">Phone Number</label>
+                            @if (form.controls['phoneNumber'].touched && getPhoneNumber.errors) {
+                                <div id="floatingPhoneNumber-validation" class="form-text text-danger">Phone Number is Required and must be vaild Phone Number</div>
+                            }
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" formControlName="address" id="floatingLocation" placeholder="Cairo">
+                            <label for="floatingLocation">Address</label>
+                            @if (form.controls['address'].touched && getAddress.errors) {
+                                <div id="floatingLocation-validation" class="form-text text-danger">Loaction is Required and must be 3 characters or more</div>
+                            }
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" formControlName="email" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Email address</label>
+                            @if (form.controls['email'].touched && getEmail.errors) {
+                                <div id="floatingInput-validation" class="form-text text-danger">Email is Required and must be valid Email</div>
+                            }
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" formControlName="password" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                            @if (form.controls['password'].touched && getPassword.errors) {
+                                <div id="floatingPassword-validation" class="form-text text-danger">Password is Required and must be Valid Password</div>
+                            }
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" formControlName="confirmPassword" id="floatingConfirmPassword" placeholder="Password">
+                            <label for="floatingConfirmPassword">Confirm Password</label>
+                            @if (form.controls['confirmPassword'].touched && getConfirmPassword.errors) {
+                                <div id="floatingConfirmPassword-validation" class="form-text text-danger">Confirm Password is Required</div>
+                            }
+                            @if (getConfirmPassword.value != getPassword.value) {
+                                <div id="floatingConfirmPassword-validation" class="form-text text-danger">Confirm Password must match your password</div>
+                            }
+                        </div>
+                        <input type="submit" class="btn btn-primary py-3 w-100 mb-4" value="Sign Up" />
+                        <p class="text-center mb-0">Already have an Account? <a [routerLink]="'/login'">Sign In</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

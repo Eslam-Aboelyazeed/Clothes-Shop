@@ -1,0 +1,195 @@
+<section class="my-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3">
+          <button
+                  class="btn btn-outline-secondary mb-3 w-100 d-lg-none"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                  >
+            <span>Show filter</span>
+          </button>
+          <div class="collapse card d-lg-block" id="navbarSupportedContent">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button
+                          class="accordion-button text-dark bg-light"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseTwo"
+                          aria-expanded="true"
+                          aria-controls="panelsStayOpen-collapseTwo"
+                          >
+                    Catagories
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+                  <div class="accordion-body">
+                    <div>
+                      @for (category of options; track $index) {
+                        <div class="form-check">
+                          <input class="form-check-input" (change)="toggleFilter(category, $event)" type="checkbox" value="" id="flexCheckChecked{{$index}}" checked />
+                          <label class="form-check-label" for="flexCheckChecked{{$index}}">{{category}}</label>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button
+                          class="accordion-button text-dark bg-light"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseThree"
+                          aria-expanded="false"
+                          aria-controls="panelsStayOpen-collapseThree"
+                          >
+                    Price
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
+                  <div class="accordion-body">
+                    <div class="row mb-3">
+                      <div class="col-6">
+                        <p class="mb-0">
+                          Min
+                        </p>
+                        <div class="form-outline">
+                          <input type="number" min="0" max="10000" [(ngModel)]="minPrice" (input)="changePriceFilter('higher')" id="typeNumber" class="form-control" />
+                          <label class="form-label" for="typeNumber">$0</label>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <p class="mb-0">
+                          Max
+                        </p>
+                        <div class="form-outline">
+                          <input type="number" min="0" max="10000" [(ngModel)]="maxPrice" (input)="changePriceFilter('lower')" id="typeNumber" class="form-control" />
+                          <label class="form-label" for="typeNumber">$10,000</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button
+                          class="accordion-button text-dark bg-light"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseFive"
+                          aria-expanded="false"
+                          aria-controls="panelsStayOpen-collapseFive"
+                          >
+                    Ratings
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingThree">
+                  <div class="accordion-body">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" (change)="toggleRatingFilter('fiveStars', $event)" id="flexCheckDefault" checked />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" (change)="toggleRatingFilter('fourStars', $event)" id="flexCheckDefault" checked  />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" (change)="toggleRatingFilter('threeStars', $event)" id="flexCheckDefault" checked />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" (change)="toggleRatingFilter('twoStars', $event)" id="flexCheckDefault" checked />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        <i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" (change)="toggleRatingFilter('oneStar', $event)" id="flexCheckDefault" checked />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        <i class="fas fa-star text-warning"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i><i class="fas fa-star text-secondary"></i>
+                        <i class="fas fa-star text-secondary"></i>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+                  <div class="accordion-body">
+                    <button type="button" (click)="applyFilter()" class="btn btn-white w-100 border border-secondary applyPriceFilterBtn">Apply</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-9">
+          <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
+            <strong class="d-block py-2">{{totalCount}} Items found </strong>
+            <div class="ms-auto">
+              <input type="text" placeholder="Search" class="form-control" (input)="searchByName()" [(ngModel)]="productName">
+            </div>
+          </header> 
+  
+          <div class="row">
+
+            <h1 class="text-center text-muted my-3">Product List</h1>
+
+            <div class="container-fluid">
+              <div class="row justify-content-center">
+                @if (productList.length > 0) {
+                  @for (product of productList; track product.id) {
+                    <app-product-item class="col-10 col-md-5 col-lg-4 my-3" [product]="product"></app-product-item>
+                  }                
+                }@else {
+                  <div class="col-10 my-3 text-center fs-4 text-danger">There are No Products with the specified filters!</div>
+                }
+              </div>
+            </div>
+
+          </div>
+  
+          <hr />
+          <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+            <ul class="pagination">
+              <li class="page-item {{(currentPage == 1)?'disabled':''}}">
+                <a class="page-link" (click)="switchPages(-1)" style="cursor: pointer;" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              @for (i of pagesList; track $index) {
+                <li class="page-item {{(currentPage == i)?'active':''}}"><a class="page-link" (click)="switchPages(i)" style="cursor: pointer;">{{i}}</a></li>
+              }
+              <li class="page-item {{(currentPage == products?.totalPages)?'disabled':''}}">
+                <a class="page-link" (click)="switchPages(0)" style="cursor: pointer;" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>            
+  </section>

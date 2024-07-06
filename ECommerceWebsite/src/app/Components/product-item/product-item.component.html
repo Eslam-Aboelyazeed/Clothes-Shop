@@ -1,0 +1,23 @@
+<div class="card w-100">
+    <div class="overlay" style="background-image: url(assets/Images/shopping-cart-with-bag.jpg); background-repeat: no-repeat;"></div>
+    <div class="image-container">
+        <img style="max-width: 100%; height: auto; width: 50%;" src="{{product?.imageUrl}}" />
+    </div>
+    <div class="con">
+        <h2>{{product?.name}}</h2>
+        <p class="mb-1">{{product?.description}}</p>
+
+        @for (i of [1,2,3,4,5]; track $index) {
+            @if (i <= product?.rating!!) {
+            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+            }@else if ((i - 1) < product?.rating!!  && product?.rating!!  < i) {
+            <i class="fa-solid fa-star-half-stroke" style="color: #FFD43B;"></i>
+            }@else {
+            <i class="fa-regular fa-star" style="color: #FFD43B;"></i>
+            }
+        }
+        <p>{{product?.price | currency}}</p>
+        <a routerLink="{{product?.id}}" class="btn btn-success rounded-5 mb-2 viewProduct"><i class="bi bi-eye"></i> View Product</a>
+    </div>
+</div>
+

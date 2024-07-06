@@ -1,0 +1,30 @@
+<div class="container-fluid position-relative bg-white d-flex p-0" style="background-image: url(assets/Images/contactUs.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <div class="container-fluid">
+        <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h3>Contact Us</h3>
+                    </div>
+                    <form [formGroup]="form" (submit)="submitMessage()">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" formControlName="email" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Email address</label>
+                            @if (form.controls['email'].touched && getEmail.errors) {
+                                <div id="floatingInput-validation" class="form-text text-danger">Email is Required and must be valid Email</div>
+                            }
+                        </div>
+                        <div class="form-floating mb-4">
+                            <textarea type="text" style="height: max-content;" formControlName="message" class="form-control" id="floatingMessage" placeholder="Message" rows="10"></textarea>
+                            <label for="floatingMesaage">Message</label>
+                            @if (form.controls['message'].touched && getMessage.errors) {
+                                <div id="floatingMesaage-validation" class="form-text text-danger">Message is Required and must be 25 characters or more</div>
+                            }
+                        </div>
+                        <input type="submit" class="btn btn-primary py-3 w-100 mb-4"value="Send Message" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
