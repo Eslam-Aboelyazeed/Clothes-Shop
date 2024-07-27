@@ -45,21 +45,21 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.uSub = this.accountService.getUserInfo(userName).subscribe({
       next: data => {
         this.user = data;
+        this.oSub = this.orderService.getUserOrders(userId).subscribe({
+          next: data => {
+            console.log(data);
+            this.userOrders = data;
+          },
+          error: error =>{
+            console.log(error);
+          }
+        })
       },
       error:error => {
         console.log(error);
       }
     })
 
-    this.oSub = this.orderService.getUserOrders(userId).subscribe({
-      next: data => {
-        console.log(data);
-        this.userOrders = data;
-      },
-      error: error =>{
-        console.log(error);
-      }
-    })
   }
 
   ngOnDestroy(): void {

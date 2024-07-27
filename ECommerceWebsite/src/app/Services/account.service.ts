@@ -10,16 +10,43 @@ import { IUser } from '../Models/DisplayModels/IUser';
 })
 export class AccountService {
 
+  // baseUrl:string;
+
+  // headers:HttpHeaders;
+
+  // constructor(private httpClient:HttpClient, private cookieService:CookieService) { 
+  //   this.baseUrl = "https://localhost:7012/api/";
+
+  //   this.headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${this.cookieService.get("Token")}`,
+  //     'Access-Control-Allow-Origin': '*'
+  //   })
+  // }
+
+  // login(userInfo:IUserLoginInsert){
+  //   return this.httpClient.post<{token:string}>(this.baseUrl+"login", userInfo);
+  // }
+
+  // logout(id:string){
+  //   return this.httpClient.get<any>(this.baseUrl+"logout?UserId="+id, {headers: this.headers});
+  // }
+
+  // register(user:IUserInsert){
+  //   return this.httpClient.post<any>(this.baseUrl+"register",user);
+  // }
+
+  // getUserInfo(userName:string){
+  //   return this.httpClient.get<IUser>(this.baseUrl+`User?userName=${userName}`, {headers: this.headers})
+  // }
+
+  // forgetPassword(userEmail:string){
+  //   return this.httpClient.get(this.baseUrl+`ForgetPassword?userEmail=${userEmail}`)
+  // }
+
   baseUrl:string;
 
-  headers:HttpHeaders;
-
-  constructor(private httpClient:HttpClient, private cookieService:CookieService) { 
-    this.baseUrl = "http://localhost:5259/api/";
-
-    this.headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.cookieService.get("Token")}`
-    })
+  constructor(private httpClient:HttpClient) { 
+    this.baseUrl = "https://localhost:7012/api/";
   }
 
   login(userInfo:IUserLoginInsert){
@@ -27,7 +54,7 @@ export class AccountService {
   }
 
   logout(id:string){
-    return this.httpClient.get<any>(this.baseUrl+"logout?UserId="+id, {headers: this.headers});
+    return this.httpClient.get<any>(this.baseUrl+"logout?UserId="+id);
   }
 
   register(user:IUserInsert){
@@ -35,7 +62,7 @@ export class AccountService {
   }
 
   getUserInfo(userName:string){
-    return this.httpClient.get<IUser>(this.baseUrl+`User?userName=${userName}`, {headers: this.headers})
+    return this.httpClient.get<IUser>(this.baseUrl+`User?userName=${userName}`)
   }
 
   forgetPassword(userEmail:string){

@@ -9,7 +9,7 @@ export class ConfirmEmailService {
   baseUrl:string;
 
   constructor(private httpClient:HttpClient) { 
-    this.baseUrl = "http://localhost:5259/api/confirmemail"
+    this.baseUrl = "https://localhost:7012/api/confirmemail"
   }
 
   confirmEmail(uid:string, token:string){

@@ -27,11 +27,18 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   rSub:any;
 
+  oSub:any;
+
   cartCount:number;
 
   uid:string;
 
-  constructor(private cookieService:CookieService, private router:Router, private accountService:AccountService, private subjectService:SubjectService){
+  constructor(
+    private cookieService:CookieService, 
+    private router:Router, private accountService:AccountService, 
+    private subjectService:SubjectService,
+    private orderService:OrderService
+  ){
     this.UserName = "";
     this.cartCount = 0;
     this.uid = '';
@@ -52,7 +59,17 @@ export class NavBarComponent implements OnInit, OnDestroy {
       }
     })
 
-    this.subjectService.sync();
+    // this.subjectService.sync();
+    if (this.uid != '') {      
+      this.oSub = this.orderService.getOrderCount(this.uid).subscribe({
+        next: data => {
+          this.subjectService.setValue(data);
+        },
+        error: error => {
+          console.log(error);
+        }
+      })
+    }
 
     this.subjectService.getValue().subscribe({
       next: data => {
@@ -71,6 +88,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
     if (this.rSub != undefined) {
       this.rSub.unsubscribe();
+    }
+
+    if (this.oSub != undefined) {
+      this.oSub.unsubscribe();
     }
   }
 

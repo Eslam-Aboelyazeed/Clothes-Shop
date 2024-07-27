@@ -9,6 +9,7 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from '../../app.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnDestroy {
   aSub:any;
   fSub:any;
 
-  constructor(private accountService:AccountService, private cookieService:CookieService, private router:Router){
+  constructor(private accountService:AccountService, private cookieService:CookieService, private router:Router, private authService:AuthService){
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
@@ -93,7 +94,8 @@ export class LoginComponent implements OnDestroy {
           this.cookieService.set("ExpireDate",(new Date().getDate()+1).toString(), 1);
         }
 
-
+        this.authService.setToken(data.token);
+        
         if (token['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === "User") {
           this.router.navigate(["/"])
         }else if (token['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === "Admin"){

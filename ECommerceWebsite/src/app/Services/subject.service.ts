@@ -6,51 +6,51 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
-export class SubjectService implements OnInit, OnDestroy {
+export class SubjectService {
 
   subject:Subject<number>;
 
   index:number;
 
-  private oSub:any;
+  // private oSub:any;
 
-  private uid:string;
+  // private uid:string;
 
-  constructor(private orderService:OrderService, private cookieService: CookieService) {
+  constructor() {
     this.subject = new Subject();
     this.index = 0;
-    this.uid = '';
+    // this.uid = '';
   }
 
-  ngOnInit(): void {
+  // ngOnInit(): void {
 
-  }
+  // }
 
-  ngOnDestroy(): void {
-    if (this.oSub != undefined) {
-      this.oSub.unsubscribe();
-    }
-  }
+  // ngOnDestroy(): void {
+  //   if (this.oSub != undefined) {
+  //     this.oSub.unsubscribe();
+  //   }
+  // }
 
-  sync(){
-    if (localStorage.getItem("RememberMe") === "true") {
-      this.uid = localStorage.getItem("UserId") || "";
-    }else{
-      this.uid = this.cookieService.get("UserId");
-    }
-    if (this.uid != '') {      
-      this.oSub = this.orderService.getOrderCount(this.uid).subscribe({
-        next: data => {
-          this.index = data;
+  // sync(){
+  //   if (localStorage.getItem("RememberMe") === "true") {
+  //     this.uid = localStorage.getItem("UserId") || "";
+  //   }else{
+  //     this.uid = this.cookieService.get("UserId");
+  //   }
+  //   if (this.uid != '') {      
+  //     this.oSub = this.orderService.getOrderCount(this.uid).subscribe({
+  //       next: data => {
+  //         this.index = data;
   
-          this.subject.next(data);
-        },
-        error: error => {
-          console.log(error);
-        }
-      })
-    }
-  }
+  //         this.subject.next(data);
+  //       },
+  //       error: error => {
+  //         console.log(error);
+  //       }
+  //     })
+  //   }
+  // }
 
   increaseValue(){
     this.subject.next(++this.index);
@@ -64,8 +64,14 @@ export class SubjectService implements OnInit, OnDestroy {
     this.index = 0;
     this.subject.next(this.index);
   }
-
+  
+  setValue(value:number){
+    this.index = value;
+    this.subject.next(this.index);
+  }
+  
   getValue(){
     return this.subject.asObservable();
   }
+
 }

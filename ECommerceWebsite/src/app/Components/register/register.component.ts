@@ -75,6 +75,11 @@ export class RegisterComponent {
 
     this.aSub = this.accountService.register(this.form.value).subscribe({
       next: data => {
+        Swal.fire({
+          icon: "success",
+          title: "Registered",
+          text: "Please Check Your Email!",
+        })
       },
       error: error => {
         console.log(error);

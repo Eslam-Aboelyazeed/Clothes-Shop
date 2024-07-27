@@ -44,7 +44,8 @@ namespace E_commerceAPI
                 options.AddPolicy("AllowSpecificOrigin",
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                    //builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
 
@@ -71,11 +72,11 @@ namespace E_commerceAPI
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowSpecificOrigin");
+            
             app.UseAuthentication();
 
             app.UseAuthorization();
-            
-            app.UseCors("AllowSpecificOrigin");
 
             app.MapControllers();
 
